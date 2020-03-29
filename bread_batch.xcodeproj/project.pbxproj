@@ -28,7 +28,7 @@
 
 /* Begin PBXFileReference section */
 		77801D47242FF0EA002EE780 /* PRI_132710315-e1583232125363.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "PRI_132710315-e1583232125363.jpg"; sourceTree = "<group>"; };
-		779C8EB1240C19030022C153 /* bread_batch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bread_batch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		779C8EB1240C19030022C153 /* bake_tray.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bake_tray.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		779C8EB4240C19030022C153 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		779C8EB6240C19030022C153 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		779C8EB8240C19030022C153 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		779C8EB2240C19030022C153 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				779C8EB1240C19030022C153 /* bread_batch.app */,
+				779C8EB1240C19030022C153 /* bake_tray.app */,
 				779C8EC7240C19040022C153 /* bread_batchTests.xctest */,
 			);
 			name = Products;
@@ -126,7 +126,7 @@
 			);
 			name = bread_batch;
 			productName = bread_batch;
-			productReference = 779C8EB1240C19030022C153 /* bread_batch.app */;
+			productReference = 779C8EB1240C19030022C153 /* bake_tray.app */;
 			productType = "com.apple.product-type.application";
 		};
 		779C8EC6240C19040022C153 /* bread_batchTests */ = {
@@ -379,8 +379,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.daviduzumaki.bread-batch";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.daviduzumaki.bake-tray";
+				PRODUCT_NAME = bake_tray;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -397,8 +397,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.daviduzumaki.bread-batch";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.daviduzumaki.bake-tray";
+				PRODUCT_NAME = bake_tray;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
