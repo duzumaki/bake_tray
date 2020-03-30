@@ -7,30 +7,39 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
-    @IBOutlet var mainImageArea: UIImageView!
+    @IBOutlet weak var mainImageArea: UIImageView!
+    @IBOutlet weak var contentImageArea: UIImageView!
+    
+    
     
     let imagePicker = UIImagePickerController()
     
-
+    
+    
     @IBAction func addImageButton(_ sender: UIButton) {
-           imagePicker.allowsEditing = false
-           imagePicker.sourceType = .photoLibrary
-           
-           present(imagePicker, animated: true, completion: nil)
-       }
-   
+       imagePicker.allowsEditing = false
+       imagePicker.sourceType = .photoLibrary
+
+       contentImageArea.layer.zPosition = 0
+       mainImageArea.layer.zPosition = 1
+       
+       present(imagePicker, animated: true, completion: nil)
+    }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainImageArea.image = UIImage(named: "main2000.png")
         
         imagePicker.delegate = self
     }
   
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            mainImageArea.contentMode = .scaleAspectFit
-            mainImageArea.image       = pickedImage
+            contentImageArea.contentMode = .scaleToFill
+            contentImageArea.image       = pickedImage
         }
         
         dismiss(animated: true, completion: nil)
