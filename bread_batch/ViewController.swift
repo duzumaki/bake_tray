@@ -16,7 +16,7 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
  
     
     @IBAction func addImageButton(_ sender: UIButton) {
-       imagePicker.allowsEditing = false
+       imagePicker.allowsEditing = true
        imagePicker.sourceType = .photoLibrary
 
        present(imagePicker, animated: true, completion: nil)
@@ -70,7 +70,12 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
   
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
+            contentImageArea.contentMode = .scaleToFill
+            contentImageArea.image       = pickedImage
+            
+        } else if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             contentImageArea.contentMode = .scaleToFill
             contentImageArea.image       = pickedImage
         }
