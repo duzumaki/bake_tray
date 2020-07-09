@@ -17,6 +17,7 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     @IBOutlet weak var contentImageArea: UIImageView!
     let imagePicker = UIImagePickerController()
     
+
  
 //    Probably a temporary image button I'm using to test uploading to the contenImage view
     @IBAction func addImageButton(_ sender: UIButton) {
@@ -26,10 +27,14 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
        present(imagePicker, animated: true, completion: nil)
     }
     
+    
+    
 //  The "main" if you will. Like a python main
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainImageArea.image = UIImage(named: "main2000.png")
+        self.mainImageArea.image = #imageLiteral(resourceName: "main2000")
+    
+//        mainImageArea.image = UIImage(named: "main2000.png")
         
         contentImageArea.layer.zPosition = 0
         mainImageArea.layer.zPosition = 1
@@ -94,8 +99,10 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     
 }
 
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-    }
-}
+//#if DEBUG
+//struct BreadBatchPhotoshopGraphicView_Previews: PreviewProvider {
+//    static var previews: some View: some View {
+//        BreadBatchPhotoshopGraphicView()
+//    }
+//}
+//#endif
