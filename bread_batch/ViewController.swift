@@ -27,27 +27,35 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
        present(imagePicker, animated: true, completion: nil)
     }
     
+    @objc func handlePan(recognizer: UIPanGestureRecognizer){
+        let translation = recognizer.translation(in: self.view)
+        if let view = recognizer.view {
+            view.center = CGPoint(x: view.center.x + translation.x, y:view.center.y + translation.y)
+        }
+        recognizer.setTranslation(CGPoint.zero, in: self.view)
+    }
+    
     
     
 //  The "main" if you will. Like a python main
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mainImageArea.image = #imageLiteral(resourceName: "main2000")
-    
-//        mainImageArea.image = UIImage(named: "main2000.png")
         
+        self.mainImageArea.image = #imageLiteral(resourceName: "main2000")
         contentImageArea.layer.zPosition = 0
         mainImageArea.layer.zPosition = 1
-        
-        //Allow the image added to be replaced.
         contentImageArea.isUserInteractionEnabled = true
+        
         let contentImageAreaLongPress = UILongPressGestureRecognizer(target: self, action: #selector(self.replaceEditDeleteLongPressContentImage))
         
+        
+         self.view.addSubview(contentImageArea)
+         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
+        
         contentImageArea.addGestureRecognizer(contentImageAreaLongPress)
+        contentImageArea.addGestureRecognizer(pan)
         
-//        The image picker needs to be made the first responder
         imagePicker.delegate = self
-        
     }
     
     override var canBecomeFirstResponder: Bool{
