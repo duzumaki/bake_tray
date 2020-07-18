@@ -27,13 +27,31 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
        present(imagePicker, animated: true, completion: nil)
     }
     
-    @objc func handlePan(recognizer: UIPanGestureRecognizer){
-        let translation = recognizer.translation(in: self.view)
-        if let view = recognizer.view {
+    
+    
+//    TODO: pass in the uiimageview as a parameter to allow the function to used more than once.
+    @objc func handlePan(gesture: UIPanGestureRecognizer){
+    
+        if let view = gesture.view {
+            let translation = gesture.translation(in: self.view)
+            if ((view.frame.origin.x + translation.x >= 0) && (view.frame.origin.y + translation.y >= 0) && (view.frame.origin.x + translation.x <= mainImageArea.frame.width) && (view.frame.origin.y + translation.y <= mainImageArea.frame.height)){
+
             view.center = CGPoint(x: view.center.x + translation.x, y:view.center.y + translation.y)
-        }
-        recognizer.setTranslation(CGPoint.zero, in: self.view)
+            }
+        gesture.setTranslation(CGPoint.zero, in: self.view)
+      }
     }
+    
+    
+    @objc func handlePinch(gesture: UIPinchGestureRecognizer){
+        guard gesture.view != nil else { return }
+        
+        if gesture.state == .began || gesture.state == .changed {
+            gesture.view?.transform = (gesture.view?.transform.scaledBy(x: gesture.scale, y: gesture.scale))!
+            gesture.scale = 1.0
+        }
+    }
+        
     
     
     
@@ -45,15 +63,19 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         contentImageArea.layer.zPosition = 0
         mainImageArea.layer.zPosition = 1
         contentImageArea.isUserInteractionEnabled = true
-        
         let contentImageAreaLongPress = UILongPressGestureRecognizer(target: self, action: #selector(self.replaceEditDeleteLongPressContentImage))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(gesture:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(gesture:)))
         
+        self.view.addSubview(contentImageArea)
         
-         self.view.addSubview(contentImageArea)
-         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
-        
+        contentImageArea.addGestureRecognizer(panGesture)
+        contentImageArea.addGestureRecognizer(pinchGesture)
         contentImageArea.addGestureRecognizer(contentImageAreaLongPress)
-        contentImageArea.addGestureRecognizer(pan)
+        
+        
+        
+    
         
         imagePicker.delegate = self
     }
