@@ -15,6 +15,10 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
 //    contentImage = the UIImageView where a photo wil be added to
     @IBOutlet weak var mainImageArea: UIImageView!
     @IBOutlet weak var contentImageArea: UIImageView!
+    @IBOutlet var blackTop: UIImageView!
+    @IBOutlet var blackBottom: UIImageView!
+    
+    @IBOutlet var addButton: UIButton!
     let imagePicker = UIImagePickerController()
     
 
@@ -32,6 +36,7 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
 //    TODO: pass in the uiimageview as a parameter to allow the function to used more than once.
     @objc func handlePan(gesture: UIPanGestureRecognizer){
         guard gesture.view != nil else { return }
+    
         
         if gesture.state == .began || gesture.state == .changed {
             let translation = gesture.translation(in: self.view)
@@ -71,6 +76,9 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         self.mainImageArea.image = #imageLiteral(resourceName: "main2000")
         contentImageArea.layer.zPosition = 0
         mainImageArea.layer.zPosition = 1
+        blackTop.layer.zPosition = 1
+        blackBottom.layer.zPosition = 1
+        addButton.layer.zPosition = 3
         contentImageArea.isUserInteractionEnabled = true
         contentImageArea.isMultipleTouchEnabled = true
         
@@ -81,7 +89,7 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         
         //add pan gesture
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(gesture:)))
-//        self.view.addSubview(contentImageArea)
+        self.view.addSubview(contentImageArea)
         panGesture.delegate = self
         contentImageArea.addGestureRecognizer(panGesture)
         
@@ -94,9 +102,6 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         let rotationGesture = UIRotationGestureRecognizer.init(target: self, action: #selector(self.handleRotate(gesture:)))
         rotationGesture.delegate = self
         contentImageArea.addGestureRecognizer(rotationGesture)
-        
-        
-        
         
         imagePicker.delegate = self
         
