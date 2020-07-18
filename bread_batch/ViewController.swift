@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextFieldDelegate {
+class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
 //    MainImage = the graphic Niall provided.
 //    contentImage = the UIImageView where a photo wil be added to
@@ -31,25 +31,34 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     
 //    TODO: pass in the uiimageview as a parameter to allow the function to used more than once.
     @objc func handlePan(gesture: UIPanGestureRecognizer){
-    
-        if let view = gesture.view {
+        guard gesture.view != nil else { return }
+        
+        if gesture.state == .began || gesture.state == .changed {
             let translation = gesture.translation(in: self.view)
-            if ((view.frame.origin.x + translation.x >= 0) && (view.frame.origin.y + translation.y >= 0) && (view.frame.origin.x + translation.x <= mainImageArea.frame.width) && (view.frame.origin.y + translation.y <= mainImageArea.frame.height)){
-
-            view.center = CGPoint(x: view.center.x + translation.x, y:view.center.y + translation.y)
-            }
-        gesture.setTranslation(CGPoint.zero, in: self.view)
-      }
+            gesture.view!.center = CGPoint(x: gesture.view!.center.x + translation.x, y:gesture.view!.center.y + translation.y)
+            gesture.setTranslation(CGPoint.zero, in: self.view)
+        }
     }
     
     
     @objc func handlePinch(gesture: UIPinchGestureRecognizer){
         guard gesture.view != nil else { return }
         
-        if gesture.state == .began || gesture.state == .changed {
-            gesture.view?.transform = (gesture.view?.transform.scaledBy(x: gesture.scale, y: gesture.scale))!
+        if let view = gesture.view {
+            view.transform = view.transform.scaledBy(x: gesture.scale, y: gesture.scale)
             gesture.scale = 1.0
         }
+    }
+    
+    @objc func handleRotate(gesture: UIRotationGestureRecognizer){
+        if let view = gesture.view {
+            view.transform = view.transform.rotated(by: gesture.rotation)
+            gesture.rotation = 0
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
         
     
@@ -63,21 +72,34 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         contentImageArea.layer.zPosition = 0
         mainImageArea.layer.zPosition = 1
         contentImageArea.isUserInteractionEnabled = true
+        contentImageArea.isMultipleTouchEnabled = true
+        
+        //add long press menu function
         let contentImageAreaLongPress = UILongPressGestureRecognizer(target: self, action: #selector(self.replaceEditDeleteLongPressContentImage))
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(gesture:)))
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(gesture:)))
-        
-        self.view.addSubview(contentImageArea)
-        
-        contentImageArea.addGestureRecognizer(panGesture)
-        contentImageArea.addGestureRecognizer(pinchGesture)
         contentImageArea.addGestureRecognizer(contentImageAreaLongPress)
         
         
+        //add pan gesture
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(gesture:)))
+//        self.view.addSubview(contentImageArea)
+        panGesture.delegate = self
+        contentImageArea.addGestureRecognizer(panGesture)
         
-    
+        //add pinch gesture
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(gesture:)))
+        pinchGesture.delegate = self
+        contentImageArea.addGestureRecognizer(pinchGesture)
+        
+        //add rotation gesture
+        let rotationGesture = UIRotationGestureRecognizer.init(target: self, action: #selector(self.handleRotate(gesture:)))
+        rotationGesture.delegate = self
+        contentImageArea.addGestureRecognizer(rotationGesture)
+        
+        
+        
         
         imagePicker.delegate = self
+        
     }
     
     override var canBecomeFirstResponder: Bool{
