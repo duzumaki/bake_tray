@@ -1,0 +1,6 @@
+module Pods_bread_batch {
+  umbrella header "Pods-bread_batch-umbrella.h"
+
+  export *
+  module * { export * }
+}

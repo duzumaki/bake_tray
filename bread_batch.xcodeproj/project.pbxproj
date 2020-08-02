@@ -15,6 +15,7 @@
 		779C8EBE240C19040022C153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779C8EBD240C19040022C153 /* Assets.xcassets */; };
 		779C8EC1240C19040022C153 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779C8EBF240C19040022C153 /* LaunchScreen.storyboard */; };
 		779C8ECC240C19040022C153 /* bread_batchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C8ECB240C19040022C153 /* bread_batchTests.swift */; };
+		9AF4FBE6AA4CECC632562DC5 /* libPods-bread_batch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95CC9DE6CCA9B54B88295933 /* libPods-bread_batch.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C3D368E72579997ADBEBE05 /* Pods-bread_batch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bread_batch.release.xcconfig"; path = "Target Support Files/Pods-bread_batch/Pods-bread_batch.release.xcconfig"; sourceTree = "<group>"; };
 		77801D4824311D4C002EE780 /* main_template */ = {isa = PBXFileReference; lastKnownFileType = folder; path = main_template; sourceTree = "<group>"; };
 		779C8EB1240C19030022C153 /* bake_tray.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bake_tray.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		779C8EB4240C19030022C153 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		779C8EC7240C19040022C153 /* bread_batchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bread_batchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		779C8ECB240C19040022C153 /* bread_batchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bread_batchTests.swift; sourceTree = "<group>"; };
 		779C8ECD240C19040022C153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95CC9DE6CCA9B54B88295933 /* libPods-bread_batch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bread_batch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA3CB3376DD64D709067CB76 /* Pods-bread_batch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bread_batch.debug.xcconfig"; path = "Target Support Files/Pods-bread_batch/Pods-bread_batch.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AF4FBE6AA4CECC632562DC5 /* libPods-bread_batch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +65,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EDD837C72C2E7256B1A35D9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DA3CB3376DD64D709067CB76 /* Pods-bread_batch.debug.xcconfig */,
+				5C3D368E72579997ADBEBE05 /* Pods-bread_batch.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		77801D46242FF0DD002EE780 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +89,8 @@
 				779C8EB3240C19030022C153 /* bread_batch */,
 				779C8ECA240C19040022C153 /* bread_batchTests */,
 				779C8EB2240C19030022C153 /* Products */,
+				0EDD837C72C2E7256B1A35D9 /* Pods */,
+				C519280D49B5F0A6BCA68522 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +127,14 @@
 			path = bread_batchTests;
 			sourceTree = "<group>";
 		};
+		C519280D49B5F0A6BCA68522 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95CC9DE6CCA9B54B88295933 /* libPods-bread_batch.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,6 +142,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 779C8ED0240C19040022C153 /* Build configuration list for PBXNativeTarget "bread_batch" */;
 			buildPhases = (
+				B7329F5644A0C63E23B9C9D1 /* [CP] Check Pods Manifest.lock */,
 				779C8EAD240C19030022C153 /* Sources */,
 				779C8EAE240C19030022C153 /* Frameworks */,
 				779C8EAF240C19030022C153 /* Resources */,
@@ -206,6 +232,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B7329F5644A0C63E23B9C9D1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bread_batch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		779C8EAD240C19030022C153 /* Sources */ = {
@@ -372,6 +423,7 @@
 		};
 		779C8ED1240C19040022C153 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA3CB3376DD64D709067CB76 /* Pods-bread_batch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -390,6 +442,7 @@
 		};
 		779C8ED2240C19040022C153 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C3D368E72579997ADBEBE05 /* Pods-bread_batch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

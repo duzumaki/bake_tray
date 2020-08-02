@@ -8,6 +8,9 @@
 
 import UIKit
 import SwiftUI
+import BSImagePicker
+
+
 
 class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
@@ -17,9 +20,28 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     @IBOutlet weak var contentImageArea: UIImageView!
     @IBOutlet var blackTop: UIImageView!
     @IBOutlet var blackBottom: UIImageView!
-    
     @IBOutlet var addButton: UIButton!
+    
     let imagePicker = UIImagePickerController()
+    
+    @IBOutlet var test: UIButton!
+    let testImagePicker = ImagePickerController()
+    
+    @IBAction func addTestImageButton(testButton sender: UIButton){
+        presentImagePicker(testImagePicker, select: { (asset) in
+            // User selected an asset. Do something with it. Perhaps begin processing/upload?
+        }, deselect: { (asset) in
+            // User deselected an asset. Cancel whatever you did when asset was selected.
+        }, cancel: { (assets) in
+            // User canceled selection.
+        }, finish: { (assets) in
+            // User finished selection assets.
+        })
+    }
+    
+    
+    
+    
     
 
  
@@ -79,6 +101,7 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         blackTop.layer.zPosition = 1
         blackBottom.layer.zPosition = 1
         addButton.layer.zPosition = 3
+        test.layer.zPosition = 3
         contentImageArea.isUserInteractionEnabled = true
         contentImageArea.isMultipleTouchEnabled = true
         
