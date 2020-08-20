@@ -1,3 +1,7 @@
 # bake_tray
 
-This is an app I'm developing for Bread Batch. It will aloow him to create his news posts via this application
+This is an app I'm developing for Bread Batch. It will allow him to create his news posts via this application.  
+
+V1.0 will support video and photo renders.
+V2.0 will allow for mulitple theme selection
+V2.5 will focus on a better UI/UX design
