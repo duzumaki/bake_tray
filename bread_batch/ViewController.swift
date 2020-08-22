@@ -39,6 +39,7 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     //Assign cell_one the image
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
+        
         cell.imageOneView.image = PhotoArray[indexPath.item]
         
         return cell
@@ -79,13 +80,17 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
                 var thumbnail = UIImage()
                 options.isSynchronous = true
                 options.version = .original
-                manager.requestImage(for: selectedAssets[i], targetSize: CGSize(width:200,  height: 200), contentMode: .aspectFill, options: options, resultHandler: { (result, info) in
+                manager.requestImage(for: selectedAssets[i],
+                                     targetSize: PHImageManagerMaximumSize,
+                                     contentMode: .aspectFill,
+                                     options: options,
+                                     resultHandler: { (result, info) in
                     thumbnail = result!
                 })
                 self.PhotoArray.append(thumbnail)
             }
         }
-        userSelectedImagesCollectionView.reloadData()
+       userSelectedImagesCollectionView.reloadData()
     }
  
 //    Probably a temporary image button I'm using to test uploading to the contenImage view
