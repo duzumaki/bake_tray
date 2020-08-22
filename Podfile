@@ -3,4 +3,5 @@
 
 target 'bread_batch' do
   pod "BSImagePicker", "~> 3.1"
+  pod "DNDDragAndDrop","~> 1.4"
 end

@@ -1,8 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/BSImagePicker"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/DNDDragAndDrop"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/BSImagePicker" "${PODS_CONFIGURATION_BUILD_DIR}/DNDDragAndDrop"
 OTHER_CFLAGS = $(inherited) -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/BSImagePicker/BSImagePicker.modulemap"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"BSImagePicker" -framework "Photos" -framework "UIKit"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"BSImagePicker" -l"DNDDragAndDrop" -framework "Foundation" -framework "Photos" -framework "UIKit"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -Xcc -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/BSImagePicker/BSImagePicker.modulemap"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

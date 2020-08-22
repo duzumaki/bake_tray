@@ -9,12 +9,16 @@
 import UIKit
 import SwiftUI
 import BSImagePicker
+import Photos
 
 
 
-class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
-//    MainImage = the graphic Niall provided.
+    @IBOutlet weak var userSelectedImagesCollectionView: UICollectionView!
+    
+    
+    //    MainImage = the graphic Niall provided.
 //    contentImage = the UIImageView where a photo wil be added to
     @IBOutlet weak var mainImageArea: UIImageView!
     @IBOutlet weak var contentImageArea: UIImageView!
@@ -23,27 +27,66 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     @IBOutlet var addButton: UIButton!
     
     let imagePicker = UIImagePickerController()
-    
     @IBOutlet var test: UIButton!
-    let testImagePicker = ImagePickerController()
+    var selectedAssets = [PHAsset]()
+    var PhotoArray = [UIImage]()
     
-    @IBAction func addTestImageButton(testButton sender: UIButton){
-        presentImagePicker(testImagePicker, select: { (asset) in
-            // User selected an asset. Do something with it. Perhaps begin processing/upload?
-        }, deselect: { (asset) in
-            // User deselected an asset. Cancel whatever you did when asset was selected.
-        }, cancel: { (assets) in
-            // User canceled selection.
-        }, finish: { (assets) in
-            // User finished selection assets.
-        })
+    //return the count of the selected images from the photo album
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return PhotoArray.count
+    }
+    
+    //Assign cell_one the image
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
+        cell.imageOneView.image = PhotoArray[indexPath.item]
+        
+        return cell
     }
     
     
     
+    //Button to gather all images and videos into one PHAssets array.
+    @IBAction func addTestImageButton(testButton sender: UIButton){
+        let multiImagePicker = ImagePickerController()
+        multiImagePicker.settings.selection.max = 5
+        multiImagePicker.settings.theme.selectionStyle = .numbered
+        multiImagePicker.settings.fetch.assets.supportedMediaTypes = [.image, .video]
+        multiImagePicker.settings.selection.unselectOnReachingMax = true
+       
+        presentImagePicker(multiImagePicker,animated: true, select: { (asset) in
+            //print("Selected: \(asset)")
+        }, deselect: { (asset) in
+           // print("Selected: \(asset)")
+        }, cancel: { (assets) in
+            //print("Selected: \(assets)")
+        }, finish: { (assets) in
+            for i in 0..<assets.count
+            {
+                self.selectedAssets.append(assets[i])
+            }
+            self.convertPHAssetsToUIImages()
+        })
+    }
     
     
-
+    //function to convert PHAssets into array of images and(or) videos
+    @objc func convertPHAssetsToUIImages(){
+        if selectedAssets.count != 0 {
+            for i in 0..<selectedAssets.count{
+                let manager = PHImageManager.default()
+                let options = PHImageRequestOptions()
+                var thumbnail = UIImage()
+                options.isSynchronous = true
+                options.version = .original
+                manager.requestImage(for: selectedAssets[i], targetSize: CGSize(width:200,  height: 200), contentMode: .aspectFill, options: options, resultHandler: { (result, info) in
+                    thumbnail = result!
+                })
+                self.PhotoArray.append(thumbnail)
+            }
+        }
+        userSelectedImagesCollectionView.reloadData()
+    }
  
 //    Probably a temporary image button I'm using to test uploading to the contenImage view
     @IBAction func addImageButton(_ sender: UIButton) {
@@ -59,7 +102,6 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     @objc func handlePan(gesture: UIPanGestureRecognizer){
         guard gesture.view != nil else { return }
     
-        
         if gesture.state == .began || gesture.state == .changed {
             let translation = gesture.translation(in: self.view)
             gesture.view!.center = CGPoint(x: gesture.view!.center.x + translation.x, y:gesture.view!.center.y + translation.y)
@@ -88,12 +130,10 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         return true
     }
         
-    
-    
-    
-//  The "main" if you will. Like a python main
     override func viewDidLoad() {
         super.viewDidLoad()
+        userSelectedImagesCollectionView.dataSource = self
+        userSelectedImagesCollectionView.delegate = self
         
         self.mainImageArea.image = #imageLiteral(resourceName: "main2000")
         contentImageArea.layer.zPosition = 0
@@ -102,8 +142,11 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         blackBottom.layer.zPosition = 1
         addButton.layer.zPosition = 3
         test.layer.zPosition = 3
+        userSelectedImagesCollectionView.layer.zPosition = 3
         contentImageArea.isUserInteractionEnabled = true
         contentImageArea.isMultipleTouchEnabled = true
+        
+        
         
         //add long press menu function
         let contentImageAreaLongPress = UILongPressGestureRecognizer(target: self, action: #selector(self.replaceEditDeleteLongPressContentImage))

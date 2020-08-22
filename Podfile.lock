@@ -1,16 +1,20 @@
 PODS:
   - BSImagePicker (3.2.1)
+  - DNDDragAndDrop (1.4.0)
 
 DEPENDENCIES:
   - BSImagePicker (~> 3.1)
+  - DNDDragAndDrop (~> 1.4)
 
 SPEC REPOS:
   trunk:
     - BSImagePicker
+    - DNDDragAndDrop
 
 SPEC CHECKSUMS:
   BSImagePicker: 5e87fe42526efdc3fe8ea23d6e4fac9eef43ecfb
+  DNDDragAndDrop: 4b8f74b52a185757d6fe1c5b2c7cf51d633d08ae
 
-PODFILE CHECKSUM: 9c3ec18541fd778048c2eda01cc3641ce99aebb5
+PODFILE CHECKSUM: fd3d19f39e55b80fae38965707aa9fc57f376045
 
 COCOAPODS: 1.9.3
