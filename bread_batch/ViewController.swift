@@ -61,9 +61,8 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         if userSelectedImagesCollectionViewFlowLayout == nil {
             let numberOfItemsPerRow: CGFloat = 3
             let lineSpacing: CGFloat = 0
-            let interItemSpacing: CGFloat = 0
             
-            let width = (userSelectedImagesCollectionView.frame.width-(numberOfItemsPerRow - 1)*lineSpacing)/numberOfItemsPerRow
+            let width = userSelectedImagesCollectionView.frame.width / numberOfItemsPerRow
             let height = width
             
             userSelectedImagesCollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -71,7 +70,6 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
             userSelectedImagesCollectionViewFlowLayout.sectionInset = UIEdgeInsets.zero
             userSelectedImagesCollectionViewFlowLayout.scrollDirection = .horizontal
             userSelectedImagesCollectionViewFlowLayout.minimumLineSpacing = lineSpacing
-            userSelectedImagesCollectionViewFlowLayout.minimumInteritemSpacing = interItemSpacing
             userSelectedImagesCollectionView.setCollectionViewLayout(userSelectedImagesCollectionViewFlowLayout, animated: true)
         }
         
