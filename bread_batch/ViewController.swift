@@ -15,8 +15,6 @@ import Photos
 
 class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    @IBOutlet weak var userSelectedImagesCollectionView: UICollectionView!
-    
     
     //    MainImage = the graphic Niall provided.
 //    contentImage = the UIImageView where a photo wil be added to
@@ -30,6 +28,9 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     @IBOutlet var test: UIButton!
     var selectedAssets = [PHAsset]()
     var PhotoArray = [UIImage]()
+    
+     @IBOutlet weak var userSelectedImagesCollectionView: UICollectionView!
+     var userSelectedImagesCollectionViewFlowLayout: UICollectionViewFlowLayout!
     
     //return the count of the selected images from the photo album
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -45,7 +46,35 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         return cell
     }
     
+    private func setupCollectionView(){
+        userSelectedImagesCollectionView.dataSource = self
+        userSelectedImagesCollectionView.delegate = self
+    }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setupCollectionViewItemSize()
+    }
+    
+    private func setupCollectionViewItemSize(){
+        if userSelectedImagesCollectionViewFlowLayout == nil {
+            let numberOfItemsPerRow: CGFloat = 3
+            let lineSpacing: CGFloat = 5
+            let interItemSpacing: CGFloat = 5
+            
+            let width = (userSelectedImagesCollectionView.frame.width-(numberOfItemsPerRow - 1)*lineSpacing)/numberOfItemsPerRow
+            let height = width
+            
+            userSelectedImagesCollectionViewFlowLayout = UICollectionViewFlowLayout()
+            userSelectedImagesCollectionViewFlowLayout.itemSize = CGSize(width: width, height: height)
+            userSelectedImagesCollectionViewFlowLayout.sectionInset = UIEdgeInsets.zero
+            userSelectedImagesCollectionViewFlowLayout.scrollDirection = .horizontal
+            userSelectedImagesCollectionViewFlowLayout.minimumLineSpacing = lineSpacing
+            userSelectedImagesCollectionViewFlowLayout.minimumInteritemSpacing = interItemSpacing
+            userSelectedImagesCollectionView.setCollectionViewLayout(userSelectedImagesCollectionViewFlowLayout, animated: true)
+        }
+        
+    }
     
     //Button to gather all images and videos into one PHAssets array.
     @IBAction func addTestImageButton(testButton sender: UIButton){
@@ -137,8 +166,7 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        userSelectedImagesCollectionView.dataSource = self
-        userSelectedImagesCollectionView.delegate = self
+        setupCollectionView()
         
         self.mainImageArea.image = #imageLiteral(resourceName: "main2000")
         contentImageArea.layer.zPosition = 0

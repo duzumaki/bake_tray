@@ -12,9 +12,9 @@
 		779C8EB7240C19030022C153 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C8EB6240C19030022C153 /* SceneDelegate.swift */; };
 		779C8EB9240C19030022C153 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C8EB8240C19030022C153 /* ViewController.swift */; };
 		779C8EBC240C19030022C153 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779C8EBA240C19030022C153 /* Main.storyboard */; };
-		779C8EBE240C19040022C153 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779C8EBD240C19040022C153 /* Assets.xcassets */; };
 		779C8EC1240C19040022C153 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779C8EBF240C19040022C153 /* LaunchScreen.storyboard */; };
 		779C8ECC240C19040022C153 /* bread_batchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779C8ECB240C19040022C153 /* bread_batchTests.swift */; };
+		77A358A224F1AF7600E29B8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779C8EBD240C19040022C153 /* Assets.xcassets */; };
 		77D134B724F160AE006030D2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D134B624F160AE006030D2 /* CollectionViewCell.swift */; };
 		9AF4FBE6AA4CECC632562DC5 /* libPods-bread_batch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95CC9DE6CCA9B54B88295933 /* libPods-bread_batch.a */; };
 /* End PBXBuildFile section */
@@ -221,7 +221,7 @@
 			files = (
 				779C8EC1240C19040022C153 /* LaunchScreen.storyboard in Resources */,
 				77801D4924311D4C002EE780 /* main_template in Resources */,
-				779C8EBE240C19040022C153 /* Assets.xcassets in Resources */,
+				77A358A224F1AF7600E29B8E /* Assets.xcassets in Resources */,
 				779C8EBC240C19030022C153 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
