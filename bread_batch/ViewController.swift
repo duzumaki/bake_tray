@@ -37,7 +37,7 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
         return PhotoArray.count
     }
     
-    //Assign cell_one the image
+    //Assign the UIimageView in the cell the selected photo in the photos album
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         
@@ -53,14 +53,15 @@ class ViewController: UIViewController,UINavigationControllerDelegate,UIImagePic
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setupCollectionViewItemSize()
+        setupCollectionViewCellPositioningAndSizing()
     }
     
-    private func setupCollectionViewItemSize(){
+    //Setting it so there's only 3 images in the collection view evenly spaced from each other
+    private func setupCollectionViewCellPositioningAndSizing(){
         if userSelectedImagesCollectionViewFlowLayout == nil {
             let numberOfItemsPerRow: CGFloat = 3
-            let lineSpacing: CGFloat = 5
-            let interItemSpacing: CGFloat = 5
+            let lineSpacing: CGFloat = 0
+            let interItemSpacing: CGFloat = 0
             
             let width = (userSelectedImagesCollectionView.frame.width-(numberOfItemsPerRow - 1)*lineSpacing)/numberOfItemsPerRow
             let height = width
